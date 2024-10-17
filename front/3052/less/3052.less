@@ -1,0 +1,162 @@
+// Variables
+@hover-bg-color: #ff675b; 
+@btn-bg-color: #ff675b;
+@btn-text-color: #fff;
+@bg-color: #ebebeb;
+@text-color: #333;
+@font-size-h5: 1.25rem;
+
+
+// Keyframes for animations
+@keyframes slideDown {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(10px); 
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+// General Styles
+.type-3052 {
+    position: relative;   
+    margin: 0 auto;      
+    padding: 0px 15px;
+    max-width: 1140px;
+    z-index: 2;
+}
+
+.container {
+    position: relative;
+    z-index: 1; // Đảm bảo các item có z-index cao hơn background
+    padding: 0;
+    margin-top: 2rem; // Điều chỉnh padding nếu cần
+
+    // Đặt background tràn toàn bộ chiều rộng màn hình
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100vw; // Chiều rộng 100% viewport
+        height: 830px; 
+        background-image: url('https://demo.brothersthemes.com/phone-repair/wp-content/uploads/sites/3/2016/12/IMG_25381.jpg?id=1601');
+        background-size: cover;        
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: translateX(-50%);
+        z-index: -1; // Background luôn ở phía sau
+    }
+}
+
+.section-heading {
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 3rem;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.post-grid {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.service-item {
+    position: relative;
+    padding: 1rem; 
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+
+    // Ảnh sẽ trượt xuống khi hover
+    &:hover .service-image-container img {
+        animation: slideDown 0.3s forwards; // Hiệu ứng slide down cho ảnh
+    }
+
+    // Tiêu đề sẽ trượt lên khi hover
+    &:hover .service-title-container{
+        animation: slideUp 0.3s forwards; // Hiệu ứng slide up cho tiêu đề
+        background-color: @hover-bg-color;
+        color: @btn-text-color;
+
+        h5{
+            color: @btn-text-color;
+        }
+    }
+
+    .service-content {
+        position: relative;
+        height: 100%;  
+        will-change: transform;
+        opacity: 1;
+        transition-duration: 250ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-property: transform, opacity;
+    }
+
+    .service-image-container {
+        position: relative;
+        width: 100%;
+        height: 250px; 
+        overflow: hidden;
+        transition: all .5s;
+
+        img {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; 
+            margin-top: -1.5rem; 
+        }
+    }
+
+    .service-title-container {
+        position: absolute; 
+        bottom: -20px; 
+        width: 100%;
+        height: 80px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: @bg-color;
+        padding: 2rem 1rem;
+
+        .service-title {
+            font-weight: bold;
+            font-size: @font-size-h5;
+            color: @text-color;
+            margin: 0;
+            transition: all .1s;
+        }
+    }   
+}
+
+// Button Styles
+.btn-danger {
+    background-color: @btn-bg-color;
+    color: @btn-text-color;
+    padding: 10px 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 1px solid transparent;
+    border-color: @btn-bg-color !important; 
+    transition: background-color 0.3s;
+    margin-top: 30px;
+
+    &:hover {
+        background-color: darken(@hover-bg-color, 5%);
+    }
+}
